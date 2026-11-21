@@ -18,5 +18,6 @@
   "files": 46,
   "payload_bytes": 25545768,
   "roundtrip_verified": true,
+  "official_gmad_verified": true,
   "packaging_exclusions": []
 }
