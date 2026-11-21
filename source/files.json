@@ -1,0 +1,278 @@
+[
+  {
+    "path": "lua/autorun/include/pill_herobrine.lua",
+    "size": 62672,
+    "crc": 2864239893,
+    "sha256": "2b72ccdea95bf6bbe16e4fbef2e04911f8731b7129bad505c3e016bcceedc917"
+  },
+  {
+    "path": "lua/autorun/redimated_pill_init.lua",
+    "size": 1001,
+    "crc": 1894455442,
+    "sha256": "f0f401d001bd6193c503bd7acc050153fedfb5243ad0cd5b9df6e16d9c8d1434"
+  },
+  {
+    "path": "lua/effects/rrr_herobrine_eff.lua",
+    "size": 1435,
+    "crc": 4146213534,
+    "sha256": "bfbdadcb42259409657dc08404a60f6817bdefc3d1ca58e84f5b02bc234c503a"
+  },
+  {
+    "path": "materials/models/redimated/herobrine/herobrine-texture.vtf",
+    "size": 2256,
+    "crc": 3216402025,
+    "sha256": "ac843597469f052a97217e8c1154eaf362980f0a1dc346bcfa85e29619edb43d"
+  },
+  {
+    "path": "materials/models/redimated/herobrine/herobrinetexture.vtf",
+    "size": 16592,
+    "crc": 3994332174,
+    "sha256": "cd3da189726da3902221441f7a30767058dfb56b6971bd60e6840f4daccd17e9"
+  },
+  {
+    "path": "materials/models/redimated/herobrine/material.vmt",
+    "size": 517,
+    "crc": 2207752831,
+    "sha256": "81ca48a694874d147b4d5f82d0d4161c3334e8ef2011720a0382da1d3c42c1ef"
+  },
+  {
+    "path": "materials/models/redimated/herobrine/shared_n.vtf",
+    "size": 576,
+    "crc": 649465489,
+    "sha256": "2521107b64e5d4c80ca3b78b112deb3c51662656314b79d1f16ff8ca58d53510"
+  },
+  {
+    "path": "materials/models/redimated/herobrine/white.vtf",
+    "size": 349776,
+    "crc": 1651013401,
+    "sha256": "d09864a29e02e9d978a6d18696a9bb98151071eecedc95ac6d1d73936888cb82"
+  },
+  {
+    "path": "materials/models/redimated/herobrine/whiteglow.vmt",
+    "size": 75,
+    "crc": 3871396403,
+    "sha256": "c627849180777f4b14f99cbc05fb2e7da259ba5db129aa618e43fe71195e5504"
+  },
+  {
+    "path": "materials/pills/i_need_a_hero_brian.png",
+    "size": 2131852,
+    "crc": 662198935,
+    "sha256": "af1b39e73899ac9e01de49d3c3e233f2ef3f718c797fa7c1eaefb27c1683625e"
+  },
+  {
+    "path": "materials/pills/redimated_herobrine.png",
+    "size": 171028,
+    "crc": 2387516017,
+    "sha256": "5a7d8049fa51326951be527a8ccf15da2446777ac4fa62b15f4c0997f37c4aae"
+  },
+  {
+    "path": "materials/pills/rpp_herobrine.png",
+    "size": 659789,
+    "crc": 1100899702,
+    "sha256": "31c0c40a049574b2bbdde508bbd96fd5fc07e83f43202c00e927537279af95a2"
+  },
+  {
+    "path": "materials/redimated/herobrine/eletric.png",
+    "size": 242570,
+    "crc": 1515904232,
+    "sha256": "dd2c592e56a11984f0a5afa4b8a23d186f33cbb0bae9088e349e251ed756a476"
+  },
+  {
+    "path": "materials/redimated/herobrine/herobrian_fog.png",
+    "size": 39183,
+    "crc": 3461669823,
+    "sha256": "b41bc4896d64a1bc7505b208237a43b65a7f0f66f14cf84f02e3bb9c1831d8a1"
+  },
+  {
+    "path": "materials/redimated/herobrine/herobrian_spectral.png",
+    "size": 42350,
+    "crc": 2554007528,
+    "sha256": "eeeef31a7d7f3c92af35267508341307366857663f2797ce22f3ca4923837a99"
+  },
+  {
+    "path": "models/minecraft/alex/alex.mdl",
+    "size": 17600,
+    "crc": 1304485810,
+    "sha256": "9c7b8d9b0336f191506db795b7d95b735a267e64c8b0fdeb65e333c356a8ccc9"
+  },
+  {
+    "path": "models/minecraft/alex/alex.phy",
+    "size": 5985,
+    "crc": 1100412407,
+    "sha256": "de9bb13e2c0e6c86b430e1b7aa9a8ce5d41e9d8d481e910c853c4bc8b4f7a8cc"
+  },
+  {
+    "path": "models/minecraft/alex/alex.vvd",
+    "size": 2613504,
+    "crc": 368642507,
+    "sha256": "ca376bdd8af6fc9c8744ea2ddbc2a9293a241df98ec00ab5e99c6b33a92d5462"
+  },
+  {
+    "path": "models/minecraft/alex/c_arms.mdl",
+    "size": 5052,
+    "crc": 3679995514,
+    "sha256": "c3ff986f3682a3d68a41e303cfadb09cc86cb2fcbb6a9a072b287bbae6617ee7"
+  },
+  {
+    "path": "models/minecraft/alex/c_arms.vvd",
+    "size": 634816,
+    "crc": 2955210732,
+    "sha256": "a371f7a0056a00f5ffe59d3818d2342e8d5f1fa7880e9eca60bb313ebac97234"
+  },
+  {
+    "path": "models/minecraft/mcanims/steve_anims.mdl",
+    "size": 226860,
+    "crc": 2436238156,
+    "sha256": "effe572c0c66b71f1bac2fdcd423e6c64c72aff2382a6b1fd6324731fe8944cf"
+  },
+  {
+    "path": "models/minecraft/steve/c_arms.mdl",
+    "size": 5436,
+    "crc": 1783439080,
+    "sha256": "79e2a8cff98f3985f4d45341b9a34bef2df9cc45989a8c18d34e554a0b4ecc46"
+  },
+  {
+    "path": "models/minecraft/steve/c_arms.vvd",
+    "size": 745536,
+    "crc": 907103719,
+    "sha256": "aa652fe1332360c89b6e65d886b28e2be710591104c1570158f9edce6c30b1bd"
+  },
+  {
+    "path": "models/minecraft/steve/steve.mdl",
+    "size": 17984,
+    "crc": 760014932,
+    "sha256": "ec10fa4792a0645cdf5c47c8784499916f4ee46f2b16332f189dd5fa9e363064"
+  },
+  {
+    "path": "models/minecraft/steve/steve.phy",
+    "size": 5987,
+    "crc": 2128512332,
+    "sha256": "dd9c9ac5d21c05735c3090dd1568e36e241a9ecae6d0069fb6e8387c534769d9"
+  },
+  {
+    "path": "models/minecraft/steve/steve.vvd",
+    "size": 2789952,
+    "crc": 29538635,
+    "sha256": "6342d8936758fda895aa636eabd695e62dd288f2e420a3223e401671dff9f925"
+  },
+  {
+    "path": "models/redimated/herobrine.dx90.vtx",
+    "size": 5061,
+    "crc": 1284631448,
+    "sha256": "7a71d7510c08af27f87b2c1cec3bcca6def07b47f92b54155bbd76673d9ae17a"
+  },
+  {
+    "path": "models/redimated/herobrine.mdl",
+    "size": 42232,
+    "crc": 2431049641,
+    "sha256": "2488d73d1090284425ff53d75a9b29dd355ce563e427494fd86dd84a1da5dddd"
+  },
+  {
+    "path": "models/redimated/herobrine.vvd",
+    "size": 22016,
+    "crc": 3212101670,
+    "sha256": "a7f37222c993c5ce26ec084788694e003f719efe40510806c0c59bfe6ac5287a"
+  },
+  {
+    "path": "sound/redimated/herobrine/cave1.wav",
+    "size": 1425486,
+    "crc": 2170670886,
+    "sha256": "c543eca2f3a8e3d00c02c1c08900c223c99878ddaf7a5191b72d59fe5d984d2e"
+  },
+  {
+    "path": "sound/redimated/herobrine/cave2.wav",
+    "size": 565326,
+    "crc": 154059632,
+    "sha256": "1b663a3b419d9d6d2d24cbd3858a72ffdeb257533eec83ddbad86bb535f0cdbd"
+  },
+  {
+    "path": "sound/redimated/herobrine/cave3.wav",
+    "size": 1777742,
+    "crc": 2076357693,
+    "sha256": "397f608f862b15a9a428087f0b3e0b08558a36a9de4fd21b0c7a26dbb01adbb9"
+  },
+  {
+    "path": "sound/redimated/herobrine/cave4.wav",
+    "size": 2482254,
+    "crc": 2048828368,
+    "sha256": "fc8680c4ca21ae5f96a23ed0119cd919304f0dcfd34d1480f03c81401b680c0e"
+  },
+  {
+    "path": "sound/redimated/herobrine/cave5.wav",
+    "size": 2306126,
+    "crc": 3934068100,
+    "sha256": "b8c09c469ac32816422dc0e0ee0d4aded0f59f8c36c86d77098c13922cf1e509"
+  },
+  {
+    "path": "sound/redimated/herobrine/cave6.wav",
+    "size": 1777742,
+    "crc": 3070948019,
+    "sha256": "eb3f2dbeec48d868661e44742a8efab2b54cb36a5a08b32ab63e48b210236706"
+  },
+  {
+    "path": "sound/redimated/herobrine/enter fog.mp3",
+    "size": 50466,
+    "crc": 1945054538,
+    "sha256": "7ee97a46fe701fdc3eed1a3c9e4084370464358689a0fde8b0c27e74eb24397d"
+  },
+  {
+    "path": "sound/redimated/herobrine/hero footsteps.mp3",
+    "size": 100483,
+    "crc": 43660876,
+    "sha256": "38423537c8a411a6727272a5d3a79ffa1f857bde5b3d500012db447d7deb6e64"
+  },
+  {
+    "path": "sound/redimated/herobrine/hero hit.mp3",
+    "size": 11808,
+    "crc": 454765508,
+    "sha256": "636e774b247922f301363f2dd1ddd34a7df4becf8d82b568736850d3d5a12638"
+  },
+  {
+    "path": "sound/redimated/herobrine/herobrine_kill.wav",
+    "size": 1335374,
+    "crc": 1339079561,
+    "sha256": "984e828c48499393a16713a41dc218394f4aa4e23659cb996580d15b80049943"
+  },
+  {
+    "path": "sound/redimated/herobrine/leave fog.mp3",
+    "size": 103394,
+    "crc": 2376932432,
+    "sha256": "27cb9c64ff5e22ee220a015b529b9f8974b3a7d3fbe97d5c4d9abe2463245a49"
+  },
+  {
+    "path": "sound/redimated/herobrine/spectral start.mp3",
+    "size": 82914,
+    "crc": 2998741659,
+    "sha256": "e2d4c8d77df5dd4cbf068a0995e27662a432afd6301196674ca98ccc281e42a7"
+  },
+  {
+    "path": "sound/redimated/herobrine/spectural_ambiance.wav",
+    "size": 2384024,
+    "crc": 1401693019,
+    "sha256": "621c72fed98f0a170fbe649f71ee3b99dd7c64506e26b78efc6d082e6a13e364"
+  },
+  {
+    "path": "sound/redimated/herobrine/step1.wav",
+    "size": 102478,
+    "crc": 3336599872,
+    "sha256": "9fe9a528cc03aa37d607dd63ca9f2e4befc359ecfe8ba4ef83a0b6c80042701a"
+  },
+  {
+    "path": "sound/redimated/herobrine/step2.wav",
+    "size": 53326,
+    "crc": 2284823332,
+    "sha256": "3e2544cc67dcd7cfbd63ef1f97a1f7ea997990d893f9f8cab83d7081368e3abb"
+  },
+  {
+    "path": "sound/redimated/herobrine/step3.wav",
+    "size": 65614,
+    "crc": 3111029025,
+    "sha256": "5897590068cd6ec8665919f118184b585553d826498702a86ba1386443947b22"
+  },
+  {
+    "path": "sound/redimated/herobrine/step4.wav",
+    "size": 61518,
+    "crc": 2468862578,
+    "sha256": "8847f7af84c8a8366ba0740a5477a0d1928b522831a9e40c422ad9c0a0c1b0bf"
+  }
+]

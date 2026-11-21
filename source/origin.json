@@ -1,0 +1,22 @@
+{
+  "id": "3596482970",
+  "name": "herobrine",
+  "title": "[PILL PACK] Herobrine",
+  "author": "redimated",
+  "status": "extracted_verified",
+  "acquisition": "existing_steam_client_installation",
+  "steamcmd_download_completed": false,
+  "source_workshop_url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3596482970",
+  "source_archive_sha256": "3778f7c2bdb0937e10df415f3418f84eacb67bf19996d733a27450c4356b0084",
+  "gma_header": {
+    "title": "[PILL PACK] Herobrine",
+    "description": "{\"title\":\"[PILL PACK] Herobrine\",\"type\":\"entity\",\"tags\":[\"fun\",\"roleplay\",\"cartoon\"],\"ignore\":[]}",
+    "author": "Author Name",
+    "steam_id": "0",
+    "timestamp": 1773578136
+  },
+  "files": 46,
+  "payload_bytes": 25545768,
+  "roundtrip_verified": true,
+  "packaging_exclusions": []
+}
