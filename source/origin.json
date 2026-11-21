@@ -4,8 +4,8 @@
   "title": "[PILL PACK] Herobrine",
   "author": "redimated",
   "status": "extracted_verified",
-  "acquisition": "existing_steam_client_installation",
-  "steamcmd_download_completed": false,
+  "acquisition": "steamcmd",
+  "steamcmd_download_completed": true,
   "source_workshop_url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3596482970",
   "source_archive_sha256": "3778f7c2bdb0937e10df415f3418f84eacb67bf19996d733a27450c4356b0084",
   "gma_header": {
