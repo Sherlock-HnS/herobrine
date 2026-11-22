@@ -146,10 +146,10 @@ hook.Add("OnEntityCreated", "herobrine_redimated_pill_initialize", function(ent)
                             end
 
                             if self.animFreeze and not self.plyFrozen then
-                                ply:SetWalkSpeed(ply:GetWalkSpeed() / 2)
-                                ply:SetRunSpeed(ply:GetWalkSpeed() / 2)
+                                self:ApplyMoveSpeed()
                                 self.plyFrozen = true
                             elseif not self.animFreeze and self.plyFrozen then
+                                self:ApplyMoveSpeed()
                                 self.plyFrozen = nil
                             end
 
@@ -699,6 +699,7 @@ else
     }
 
     hook.Add("HUDPaint", "RPP_Herobrine_CooldownHUD", function()
+        if SherlockHNS then return end
         local ply = LocalPlayer()
         local screenW, screenH = ScrW(), ScrH()
         local IconSize = ScrH()*0.15
@@ -983,6 +984,13 @@ local function racheljackietien_jumpscare(ply, ent, duration, customanimstuff)
             end
         end
 
+        if SherlockHNS and IsValid(jumpscare_entity) and jumpscare_entity:IsPlayer() then
+            return pk_pills.playHNSJumpscare(ply, ent, jumpscare_entity, duration, {
+                camera = "rpp_herobrine_pill_cam",
+                onStart = customanimstuff,
+            })
+        end
+
         if jumpscare_entity ~= nil then
             
             ent.JuumpscareStart = CurTime()
@@ -1226,6 +1234,7 @@ pk_pills.register('rpp_herobrine', {
                 end)
             end
             ent._rpp_last_hitcd = CurTime()+1.1
+            pk_pills.setHNSCooldown(ent, "attack", 1.1)
 
             --[[
             ]]
@@ -1243,6 +1252,7 @@ pk_pills.register('rpp_herobrine', {
             ply._rpp_standstilldur = CurTime() + standstill
             ent._rpp_SpectralSightcd = CurTime() + COOLDOWN
             ent:SetNWFloat("Herobrine_rmb_cooldown", CurTime() + COOLDOWN)
+            pk_pills.setHNSCooldown(ent, "sight", ent:GetNWFloat("Herobrine_rmb_cooldown") - CurTime())
             ent:SetNWFloat("Herobrine_rmb_timeleft", COOLDOWN)
             ent:SetNWFloat("_rpp_SpectralSightcd", CurTime() + standstill)
             if ent.PillSound then
@@ -1274,6 +1284,7 @@ pk_pills.register('rpp_herobrine', {
                 ent.iscloaked = false
                 ent.formTable.togglefly(false, ply)
                 ent:SetNWFloat("Herobrine_r_cooldown", ent._rpp_inviscd)
+                pk_pills.setHNSCooldown(ent, "fog", ent:GetNWFloat("Herobrine_r_cooldown") - CurTime())
                 ent:SetNWFloat("Herobrine_r_timeleft", COOLDOWN)
 
                 local ed = EffectData()
@@ -1292,6 +1303,7 @@ pk_pills.register('rpp_herobrine', {
                 end
                 ent.durcdHerobrine_r = CurTime() + durcd
                 ent:SetNWFloat("Herobrine_r_cooldown", CurTime() + durcd)
+                pk_pills.setHNSCooldown(ent, "fog", ent:GetNWFloat("Herobrine_r_cooldown") - CurTime())
                 ent:SetNWFloat("Herobrine_r_timeleft", durcd)
 
                 ent.iscloaked = true
@@ -1348,7 +1360,7 @@ pk_pills.register('rpp_herobrine', {
                             if ent2:IsPlayer() and ent2:Team() == TEAM_SPECTATOR then continue end
                             if IsValid(ent2) then
 
-                                if ent2:Health()-45 <= 0.1 then
+                                if (SherlockHNS and ent2:IsPlayer()) or ent2:Health()-45 <= 0.1 then
                                     local dur = ent:GetPuppet():SequenceDuration(ent:GetPuppet():LookupSequence("kill"))
                                     racheljackietien_jumpscare(
                                         ply,
@@ -1395,12 +1407,21 @@ pk_pills.register('rpp_herobrine', {
                 ['jumppower'] = ent.formTable.Herobrinemoveset.moveSpeed.jumppower
             }
             if IsValid(ply) and IsValid(ent) then
-                ply:SetWalkSpeed(speed["walk"])
-                ply:SetRunSpeed(speed["run"])
-                ply:SetCrouchedWalkSpeed(speed["ducked"])
-                ply:SetJumpPower(speed["jumppower"])
+                pk_pills.setCostumeMoveSpeed(ent, speed.walk, speed.run, speed.ducked, speed.jumppower)
             end
         end
     end,
 
-})
+}, function(form)
+    -- The legacy damage branches are for Sandbox and NPCs.
+    form.hnsKillAPI = true
+    form.hnsAbilities = {
+        { id = "attack", name = "Ataque", key = IN_ATTACK, OnUse = form.attack.func },
+        { id = "sight", name = "Visão espectral", key = IN_ATTACK2, OnUse = form.attack2.func },
+    }
+    form.attack, form.attack2, form.reload = nil, nil, nil
+    form.cloak = nil
+    pk_pills.bindHNSButtons(form, "herobrine_survivor_keybinds", {
+        { id = "fog", name = "Névoa", button = KEY_R, keyLabel = "R" },
+    })
+end)
