@@ -1,4 +1,4 @@
-[PILL PACK] Herobrine
+# [PILL PACK] Herobrine
 
 ![Workshop preview](workshop-preview.jpg)
 
