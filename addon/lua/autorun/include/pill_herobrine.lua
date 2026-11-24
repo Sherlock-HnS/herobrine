@@ -963,7 +963,7 @@ hook.Add("SetupMove", "DisablePlayerMovement_Redimated_herobine", function(ply, 
 end)
 
 
-local function racheljackietien_jumpscare(ply, ent, duration, customanimstuff)
+local function racheljackietien_jumpscare(ply, ent, duration, customanimstuff, radius)
     if SERVER then
         if not ent.IsInJumpscare then ent.IsInJumpscare = 0 end
         if ent.IsInJumpscare >= CurTime() then return end
@@ -973,9 +973,9 @@ local function racheljackietien_jumpscare(ply, ent, duration, customanimstuff)
         local jumpscare_entity = nil
 
 if SherlockHNS then
-    jumpscare_entity = SherlockHNS.FindVictim(ply, ent:LocalToWorld(Vector(0, 0, 50)), 90)
+    jumpscare_entity = SherlockHNS.FindVictim(ply, ent:LocalToWorld(Vector(0, 0, 50)), radius or 90)
 else
-    for _, ent2 in pairs(ents.FindInSphere(ent:LocalToWorld(Vector(0, 0, 50)), 90)) do
+    for _, ent2 in pairs(ents.FindInSphere(ent:LocalToWorld(Vector(0, 0, 50)), radius or 90)) do
                 if (ent2:IsPlayer() or ent2:IsNextBot() or ent2:IsNPC()) and ent2:Health() >= 0.1 then
                     if ent2 == ply then continue end
                     if ent2:IsPlayer() and ent2:Team() == TEAM_SPECTATOR then continue end
@@ -1358,7 +1358,17 @@ pk_pills.register('rpp_herobrine', {
 
             if event == "SpawnStake" then
                 if SERVER then
-                    for _, ent2 in pairs(ents.FindInSphere(ent:LocalToWorld(Vector(0, 0, 50)), 180)) do
+                    local stakeOrigin = ent:LocalToWorld(Vector(0, 0, 50))
+                    local stakeTargets
+
+                    if SherlockHNS then
+                        local target = SherlockHNS.FindVictim(ply, stakeOrigin, 180)
+                        stakeTargets = IsValid(target) and {target} or {}
+                    else
+                        stakeTargets = ents.FindInSphere(stakeOrigin, 180)
+                    end
+
+                    for _, ent2 in ipairs(stakeTargets) do
                         if (ent2:IsPlayer() or ent2:IsNextBot() or ent2:IsNPC()) and ent2:Health() >= 0.01 then
                             if ent2 == ply then continue end
                             if ent2:IsPlayer() and ent2:Team() == TEAM_SPECTATOR then continue end
@@ -1373,7 +1383,8 @@ pk_pills.register('rpp_herobrine', {
                                         function()
                                             ent:PillSound("kill")
                                             ent:PillAnim('kill')
-                                        end
+                                        end,
+                                        180
                                     )
                                     break
                                 end
