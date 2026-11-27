@@ -2,7 +2,7 @@ AddCSLuaFile()
 
 
 hook.Add("OnEntityCreated", "herobrine_redimated_pill_initialize", function(ent)
-    timer.Simple(0.00, function()
+    timer.Simple(0.1, function()
         if ! IsValid(ent) then return end
         if ent:GetClass() == "pill_ent_costume" then
             if not ent then return end
