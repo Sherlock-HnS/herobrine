@@ -3,7 +3,7 @@ AddCSLuaFile()
 
 hook.Add("OnEntityCreated", "herobrine_redimated_pill_initialize", function(ent)
     timer.Simple(0.00, function()
-        if !IsValid(ent) then return end
+        if ! IsValid(ent) then return end
         if ent:GetClass() == "pill_ent_costume" then
             if not ent then return end
             if ent.formTable then
@@ -32,10 +32,10 @@ hook.Add("OnEntityCreated", "herobrine_redimated_pill_initialize", function(ent)
 
 
                 if ent.formTable.herobrine_redimated_pill_initialize then
-                    local tablevarable = {["player"] = entityply, ["entity"] = ent, ["puppet"] = PuppetEntity}
+                    local tablevarable = { ["player"] = entityply, ["entity"] = ent, ["puppet"] = PuppetEntity }
                     timer.Simple(0.1, function()
-                        if !IsValid(ent) then return end
-                        ent.formTable:herobrine_redimated_pill_initialize(tablevarable,tablevarable,tablevarable)
+                        if ! IsValid(ent) then return end
+                        ent.formTable:herobrine_redimated_pill_initialize(tablevarable, tablevarable, tablevarable)
 
 
                         local self = ent
@@ -51,7 +51,8 @@ hook.Add("OnEntityCreated", "herobrine_redimated_pill_initialize", function(ent)
                         local hull = self.formTable.hull or Vector(32, 32, 72)
                         local duckBy = self.formTable.duckBy or (self.formTable.hull and 0 or 36)
                         ply:SetHull(-Vector(hull.x / 2, hull.y / 2, 0), Vector(hull.x / 2, hull.y / 2, hull.z))
-                        ply:SetHullDuck(-Vector(hull.x / 2, hull.y / 2, 0), Vector(hull.x / 2, hull.y / 2, hull.z - duckBy or 0))--
+                        ply:SetHullDuck(-Vector(hull.x / 2, hull.y / 2, 0),
+                            Vector(hull.x / 2, hull.y / 2, hull.z - duckBy or 0))                                                 --
                         ply:SetRenderMode(RENDERMODE_NONE)
                         pk_pills.mapEnt(ply, nil)
 
@@ -71,7 +72,6 @@ hook.Add("OnEntityCreated", "herobrine_redimated_pill_initialize", function(ent)
                             ply:SetViewOffsetDucked(camOffset - Vector(0, 0, duckBy))
                         end
                         pk_pills.mapEnt(ply, self)
-
                     end)
 
                     local self = ent
@@ -83,7 +83,6 @@ hook.Add("OnEntityCreated", "herobrine_redimated_pill_initialize", function(ent)
                         local vel = ply:GetVelocity():Length()
 
                         if SERVER then
-
                             if self.formTable.cloak then
                                 local cloak = self.formTable.cloak
 
@@ -135,7 +134,9 @@ hook.Add("OnEntityCreated", "herobrine_redimated_pill_initialize", function(ent)
                             end
                             --Anims
                             local anims = table.Copy(self.formTable.anims.default or {})
-                            table.Merge(anims, (IsValid(ply:GetActiveWeapon()) and self.formTable.anims[ply:GetActiveWeapon():GetHoldType()]) or (self.forceAnimSet and self.formTable.anims[self.forceAnimSet]) or {})
+                            table.Merge(anims,
+                                (IsValid(ply:GetActiveWeapon()) and self.formTable.anims[ply:GetActiveWeapon():GetHoldType()]) or
+                                (self.forceAnimSet and self.formTable.anims[self.forceAnimSet]) or {})
                             local anim
                             --local useSeqVel=true
                             local overrideRate
@@ -206,7 +207,6 @@ hook.Add("OnEntityCreated", "herobrine_redimated_pill_initialize", function(ent)
                             local ShouldAlternate = table.Copy(self.formTable.anims.ShouldAlternate or {})
                             if type(ShouldAlternate[anim]) == "function" and ShouldAlternate[anim](self) then
                                 if ShouldAlternate[anim](self) ~= nil and isstring(ShouldAlternate[anim](self)) then
-                                    
                                     anim = ShouldAlternate[anim](self)
                                 end
                             end
@@ -225,7 +225,7 @@ hook.Add("OnEntityCreated", "herobrine_redimated_pill_initialize", function(ent)
 
                             --if true then
                             if self.formTable.movePoseMode ~= "xy" and self.formTable.movePoseMode ~= "xy-bot" and not overrideRate then
-                                
+
                             else
                                 --puppet:SetPlaybackRate(1)
                             end
@@ -247,7 +247,8 @@ hook.Add("OnEntityCreated", "herobrine_redimated_pill_initialize", function(ent)
 
                                         if seq_vel ~= 0 then
                                             puppet:SetPoseParameter("move_x", math.Clamp(localvel.x / seq_vel, -.99, .99))
-                                            puppet:SetPoseParameter("move_y", math.Clamp(-localvel.y / seq_vel, -.99, .99))
+                                            puppet:SetPoseParameter("move_y",
+                                                math.Clamp(-localvel.y / seq_vel, -.99, .99))
                                         end
                                         --print(puppet:GetPlaybackRate())
                                     else
@@ -268,8 +269,10 @@ hook.Add("OnEntityCreated", "herobrine_redimated_pill_initialize", function(ent)
 
                                         if seq_vel ~= 0 then
                                             puppet:SetPoseParameter("move_x", math.Clamp(localvel.x / seq_vel, -.99, .99))
-                                            puppet:SetPoseParameter("move_y", math.Clamp(-localvel.y / seq_vel, -.99, .99))
-                                            puppet:SetPoseParameter("move_scale", math.Clamp(localvel:Length() / seq_vel, -.99, .99))
+                                            puppet:SetPoseParameter("move_y",
+                                                math.Clamp(-localvel.y / seq_vel, -.99, .99))
+                                            puppet:SetPoseParameter("move_scale",
+                                                math.Clamp(localvel:Length() / seq_vel, -.99, .99))
                                         end
                                         --print(puppet:GetPlaybackRate())
                                     else
@@ -412,18 +415,19 @@ hook.Add("OnEntityCreated", "herobrine_redimated_pill_initialize", function(ent)
                         else
                             puppet:SetRenderOrigin(ply:GetPos())
                         end
-                        
+
                         currentanim = self:GetNWString("Animlastplayed")
 
                         --if vel > 0 or math.abs(math.AngleDifference(puppet:GetAngles().y, ply:EyeAngles().y)) > 350 then
 
                         local animsshouldspn = table.Copy(self.formTable.anims.ShouldMoveRotate or {})
-                        
+
                         if SERVER then
                             local rate = 1
                             local animsshouldspn = table.Copy(self.formTable.anims.animrates or {})
                             if animsshouldspn[currentanim] or (type(animsshouldspn[currentanim]) == "function" and animsshouldspn[currentanim](self)) then
-                                rate = (type(animsshouldspn[currentanim]) == "function" and animsshouldspn[currentanim](self)) or animsshouldspn[currentanim]
+                                rate = (type(animsshouldspn[currentanim]) == "function" and animsshouldspn[currentanim](self)) or
+                                animsshouldspn[currentanim]
                             end
                             if rate > 12 then
                                 rate = 12
@@ -431,8 +435,8 @@ hook.Add("OnEntityCreated", "herobrine_redimated_pill_initialize", function(ent)
                             puppet:SetPlaybackRate(rate)
                         end
                         if animsshouldspn[currentanim] or (type(animsshouldspn[currentanim]) == "function" and animsshouldspn[currentanim](self)) then
-                            
-                            local typeofitem = (type(animsshouldspn[currentanim]) == "function" and animsshouldspn[currentanim](self)) or animsshouldspn[currentanim]
+                            local typeofitem = (type(animsshouldspn[currentanim]) == "function" and animsshouldspn[currentanim](self)) or
+                            animsshouldspn[currentanim]
                             local function SetTargetAngle(ang)
                                 ang.p = 0
                                 puppet:SetNW2Vector("SyncAng", ang:Forward())
@@ -464,13 +468,12 @@ hook.Add("OnEntityCreated", "herobrine_redimated_pill_initialize", function(ent)
                                         if targetAng then
                                             local curAng = puppet:GetRenderAngles()
                                             if not curAng then curAng = targetAng end
-                                            if not curAng.p then curAng = Angle(0,0,0) end
+                                            if not curAng.p then curAng = Angle(0, 0, 0) end
                                             local smoothAng = LerpAngle(FrameTime() * 10, curAng, targetAng)
                                             puppet:SetRenderAngles(smoothAng)
                                         end
                                     end
                                 end
-
                             elseif typeofitem == "assignedagnles_instant" then
                                 local targetAng = self:GetNWAngle("pill_assignedangle")
 
@@ -484,7 +487,6 @@ hook.Add("OnEntityCreated", "herobrine_redimated_pill_initialize", function(ent)
                                         puppet:SetRenderAngles(targetAng)
                                     end
                                 end
-
                             elseif typeofitem == "shiftlock" then
                                 local angs = ply:EyeAngles()
                                 angs.p = 0
@@ -499,12 +501,11 @@ hook.Add("OnEntityCreated", "herobrine_redimated_pill_initialize", function(ent)
                                     if targetAng then
                                         local curAng = puppet:GetRenderAngles()
                                         if not curAng then curAng = targetAng end
-                                        if not curAng.p then curAng = Angle(0,0,0) end
+                                        if not curAng.p then curAng = Angle(0, 0, 0) end
                                         local smoothAng = LerpAngle(FrameTime() * 10, curAng, targetAng)
                                         puppet:SetRenderAngles(smoothAng)
                                     end
                                 end
-
                             elseif typeofitem == "Playerangles" then
                                 local angs = ply:GetAngles()
                                 angs.p = 0
@@ -519,12 +520,11 @@ hook.Add("OnEntityCreated", "herobrine_redimated_pill_initialize", function(ent)
                                     if targetAng then
                                         local curAng = puppet:GetRenderAngles()
                                         if not curAng then curAng = targetAng end
-                                        if not curAng.p then curAng = Angle(0,0,0) end
+                                        if not curAng.p then curAng = Angle(0, 0, 0) end
                                         local smoothAng = LerpAngle(FrameTime() * 10, curAng, targetAng)
                                         puppet:SetRenderAngles(smoothAng)
                                     end
                                 end
-
                             elseif typeofitem == "assignedagnles" then
                                 local targetAng = self:GetNWAngle("pill_assignedangle")
 
@@ -537,12 +537,11 @@ hook.Add("OnEntityCreated", "herobrine_redimated_pill_initialize", function(ent)
                                     if targetAng then
                                         local curAng = puppet:GetRenderAngles()
                                         if not curAng then curAng = targetAng end
-                                        if not curAng.p then curAng = Angle(0,0,0) end
+                                        if not curAng.p then curAng = Angle(0, 0, 0) end
                                         local smoothAng = LerpAngle(FrameTime() * 10, curAng, targetAng)
                                         puppet:SetRenderAngles(smoothAng)
                                     end
                                 end
-
                             elseif typeofitem == "notanything" then
                             end
                         end
@@ -618,7 +617,7 @@ if SERVER then
     util.AddNetworkString("rpp_herobrine_variableset")
     net.Receive("rpp_herobrine_variableset", function()
         local ply = net.ReadEntity()
-        ply:SetNWFloat("_rpp_hallucinationhighlight", CurTime()+7)
+        ply:SetNWFloat("_rpp_hallucinationhighlight", CurTime() + 7)
     end)
 else
     local fadeAmount = 0
@@ -658,7 +657,7 @@ else
             hook.Remove('CalcView', hookID)
         else
             hook.Add('CalcView', hookID, function(ply, pos, angles, fov)
-                if not IsValid(ply) or not ply:Alive() or !IsValid(ent) then
+                if not IsValid(ply) or not ply:Alive() or ! IsValid(ent) then
                     hook.Remove('CalcView', hookID)
                     if IsValid(ply) then
                         ply:RemoveFlags(FL_NOTARGET)
@@ -674,9 +673,9 @@ else
                 ply:Freeze(true)
                 ply:DrawViewModel(false)
 
-                local lerpFactor = math.Clamp((CurTime() - startTime) / (0.7/3), 0, 1)
-                
-                local targetFOV = 80 
+                local lerpFactor = math.Clamp((CurTime() - startTime) / (0.7 / 3), 0, 1)
+
+                local targetFOV = 80
 
                 local orgiginlerpto = LerpVector(lerpFactor, pos, cam.Pos)
                 local angleslerpto = LerpAngle(lerpFactor, angles, cam.Ang)
@@ -702,34 +701,37 @@ else
         if SherlockHNS then return end
         local ply = LocalPlayer()
         local screenW, screenH = ScrW(), ScrH()
-        local IconSize = ScrH()*0.15
+        local IconSize = ScrH() * 0.15
         if IsValid(ply) then
             local ent = ply.pk_pill_ent
             if IsValid(ply.pk_pill_ent) and ply.pk_pill_ent.formTable == pk_pills.getPillTable("rpp_herobrine") then
-
-                local xaxis = screenW*0.5
-                local yaxis = screenH-IconSize
+                local xaxis = screenW * 0.5
+                local yaxis = screenH - IconSize
                 surface.SetMaterial(preservedmats["herobrian_fog"])
                 surface.SetDrawColor(255, 255, 255, 255)
                 surface.DrawTexturedRectUV(xaxis, yaxis, IconSize, IconSize, 0, 0, 1, 1)
 
-                local progress = (ent:GetNWInt("Herobrine_r_cooldown") - CurTime())/ent:GetNWInt("Herobrine_r_timeleft")
+                local progress = (ent:GetNWInt("Herobrine_r_cooldown") - CurTime()) /
+                ent:GetNWInt("Herobrine_r_timeleft")
                 if progress > 0 then
                     local progress2 = Lerp(progress, 1, 0)
                     surface.SetDrawColor(75, 75, 75, 255)
-                    surface.DrawTexturedRectUV(xaxis, yaxis + (IconSize* progress2), IconSize, IconSize * progress, 0, 1* progress2, 1, 1)
+                    surface.DrawTexturedRectUV(xaxis, yaxis + (IconSize * progress2), IconSize, IconSize * progress, 0,
+                        1 * progress2, 1, 1)
                 end
-                
-                local xaxis = screenW*0.5-IconSize
+
+                local xaxis = screenW * 0.5 - IconSize
                 surface.SetMaterial(preservedmats["herobrian_spectral"])
                 surface.SetDrawColor(255, 255, 255, 255)
                 surface.DrawTexturedRectUV(xaxis, yaxis, IconSize, IconSize, 0, 0, 1, 1)
 
-                local progress = (ent:GetNWInt("Herobrine_rmb_cooldown") - CurTime())/ent:GetNWInt("Herobrine_rmb_timeleft")
+                local progress = (ent:GetNWInt("Herobrine_rmb_cooldown") - CurTime()) /
+                ent:GetNWInt("Herobrine_rmb_timeleft")
                 if progress > 0 then
                     local progress2 = Lerp(progress, 1, 0)
                     surface.SetDrawColor(75, 75, 75, 255)
-                    surface.DrawTexturedRectUV(xaxis, yaxis + (IconSize* progress2), IconSize, IconSize * progress, 0, 1* progress2, 1, 1)
+                    surface.DrawTexturedRectUV(xaxis, yaxis + (IconSize * progress2), IconSize, IconSize * progress, 0,
+                        1 * progress2, 1, 1)
                 end
             end
         end
@@ -742,17 +744,15 @@ else
             if IsValid(ply.pk_pill_ent) and ply.pk_pill_ent.formTable == pk_pills.getPillTable("rpp_herobrine") then
                 local entsToOutline = {}
                 for _, ent2 in ipairs(ents.GetAll()) do
-                    if !IsValid(ent2) then continue end
+                    if ! IsValid(ent2) then continue end
                     if ent2:IsWorld() then continue end
 
                     if ent2:IsPlayer() or ent2:IsNPC() or ent2.IsNextBot and ent2:IsNextBot() then
-
-
-                        if ent:GetNWFloat("_rpp_SpectralSightcd") > CurTime() then 
+                        if ent:GetNWFloat("_rpp_SpectralSightcd") > CurTime() then
                         else
                             if ent2:GetNWFloat("_rpp_hallucinationhighlight") < CurTime() then continue end
                         end
-                        
+
                         table.insert(entsToOutline, ent2)
                     end
                 end
@@ -769,7 +769,7 @@ else
             end
         end
     end)
-    
+
     local FAR_DIST_SQR = 1450 ^ 2
     local LOOK_DOT_THRESHOLD = 0.7
     local MIN_VALID_DIST_SQR = 32 * 32
@@ -782,8 +782,8 @@ else
     local function CanHallucinate(ply)
         if #PositionsToCheck == 0 then return false end
 
-        local eyePos = ply:EyePos() or ply:GetPos() + Vector(0,0,50)
-        local viewDir = ply:EyeAngles():Forward()or ply:GetPos() + Vector(0,0,50) + ply:GetForward()*1
+        local eyePos = ply:EyePos() or ply:GetPos() + Vector(0, 0, 50)
+        local viewDir = ply:EyeAngles():Forward() or ply:GetPos() + Vector(0, 0, 50) + ply:GetForward() * 1
 
         local nearestPos
         local nearestDistSqr = math.huge
@@ -833,24 +833,24 @@ else
             local yaw  = math.random(0, 360)
             local dist = math.random(400, 1200)
 
-            local dir = Angle(0, yaw, 0):Forward()
+            local dir  = Angle(0, yaw, 0):Forward()
             if viewDir:Dot(dir) > 0.2 then continue end
 
             local startPos = plyPos + dir * dist + Vector(0, 0, 80)
             local endPos   = startPos - Vector(0, 0, 300)
 
-            local tr = util.TraceLine({
+            local tr       = util.TraceLine({
                 start  = startPos,
                 endpos = endPos,
                 filter = ply,
                 mask   = MASK_SOLID
             })
 
-            if !tr.Hit then continue end
+            if ! tr.Hit then continue end
             if tr.HitNormal.z < MIN_GROUND_NORMAL_Z then continue end
 
             local ent = ClientsideModel("models/redimated/herobrine.mdl", RENDERGROUP_TRANSLUCENT)
-            if !IsValid(ent) then return end
+            if ! IsValid(ent) then return end
 
             ent:SetPos(tr.HitPos)
             ent:SetAngles(Angle(0, (eyePos - tr.HitPos):Angle().y, 0))
@@ -863,20 +863,23 @@ else
 
             table.insert(Hallucinations, ent)
 
-            timer.Create("HallucinationFadeIn"..ent:EntIndex(), 0, 0, function()
-                if not IsValid(ent) then timer.Remove("HallucinationFadeIn"..ent:EntIndex()) return end
+            timer.Create("HallucinationFadeIn" .. ent:EntIndex(), 0, 0, function()
+                if not IsValid(ent) then
+                    timer.Remove("HallucinationFadeIn" .. ent:EntIndex())
+                    return
+                end
 
                 if ent.Alpha < 255 then
                     ent.Alpha = math.min(ent.Alpha + 255 * FrameTime(), 255)
                     ent:SetColor(Color(255, 255, 255, ent.Alpha))
                 else
-                    timer.Remove("HallucinationFadeIn"..ent:EntIndex())
+                    timer.Remove("HallucinationFadeIn" .. ent:EntIndex())
                 end
             end)
 
             local lifetime = math.Rand(HALLUCINATION_LIFETIME_MIN, HALLUCINATION_LIFETIME_MAX)
             timer.Simple(lifetime, function()
-                if !IsValid(ent) then return end
+                if ! IsValid(ent) then return end
                 ent.FadingOut = true
             end)
 
@@ -886,11 +889,11 @@ else
 
     hook.Add("Think", "ClientHallucinationSystem_FIXED", function()
         local ply = LocalPlayer()
-        if !IsValid(ply) then return end
+        if ! IsValid(ply) then return end
         local entities = {}
 
         for _, ent in ipairs(ents.GetAll()) do
-            if !IsValid(ent) then continue end
+            if ! IsValid(ent) then continue end
             if ent.formTable then else continue end
             if ent.formTable.redimated_herobrine then else continue end
             table.insert(entities, ent:GetPos())
@@ -901,20 +904,19 @@ else
 
         for i = #Hallucinations, 1, -1 do
             local ent = Hallucinations[i]
-            if !IsValid(ent) then
+            if ! IsValid(ent) then
                 table.remove(Hallucinations, i)
                 continue
             end
 
             if ply:GetPos():DistToSqr(ent:GetPos()) < 200 * 200 then
-                if !IsValid(ent) then return end
+                if ! IsValid(ent) then return end
                 if not FadingOut then
                     net.Start("rpp_herobrine_variableset")
-                        net.WriteEntity(ply)
+                    net.WriteEntity(ply)
                     net.SendToServer()
                 end
                 ent.FadingOut = true
-    
             end
 
             if ent.FadingOut then
@@ -924,16 +926,14 @@ else
                         ent:Remove()
                         table.RemoveByValue(Hallucinations, ent)
                     end
-                    
                 else
                     ent:SetColor(Color(255, 255, 255, ent.Alpha))
 
 
                     if not ent.FadeSoundPlayed then
-                        ent:EmitSound("redimated/herobrine/cave"..math.random(1,6)..".wav", 70, 100)
+                        ent:EmitSound("redimated/herobrine/cave" .. math.random(1, 6) .. ".wav", 70, 100)
                         ent.FadeSoundPlayed = true
                     end
-
                 end
             end
         end
@@ -947,9 +947,6 @@ else
             end
         end
     end)
-
-
-
 end
 
 hook.Add("SetupMove", "DisablePlayerMovement_Redimated_herobine", function(ply, mv, cmd)
@@ -972,23 +969,23 @@ local function racheljackietien_jumpscare(ply, ent, duration, customanimstuff, r
 
         local jumpscare_entity = nil
 
-if SherlockHNS then
-    jumpscare_entity = SherlockHNS.FindVictim(ply, ent:LocalToWorld(Vector(0, 0, 50)), radius or 90)
-else
-    for _, ent2 in pairs(ents.FindInSphere(ent:LocalToWorld(Vector(0, 0, 50)), radius or 90)) do
+        if SherlockHNS then
+            jumpscare_entity = SherlockHNS.FindVictim(ply, ent:LocalToWorld(Vector(0, 0, 50)), radius or 90)
+        else
+            for _, ent2 in pairs(ents.FindInSphere(ent:LocalToWorld(Vector(0, 0, 50)), radius or 90)) do
                 if (ent2:IsPlayer() or ent2:IsNextBot() or ent2:IsNPC()) and ent2:Health() >= 0.1 then
                     if ent2 == ply then continue end
                     if ent2:IsPlayer() and ent2:Team() == TEAM_SPECTATOR then continue end
-    
+
                     if IsValid(ent2) then
                         jumpscare_entity = ent2
                         break
                     end
                 end
             end
-end
+        end
 
-if SherlockHNS and IsValid(jumpscare_entity) and jumpscare_entity:IsPlayer() then
+        if SherlockHNS and IsValid(jumpscare_entity) and jumpscare_entity:IsPlayer() then
             return pk_pills.playHNSJumpscare(ply, ent, jumpscare_entity, duration, {
                 camera = "rpp_herobrine_pill_cam",
                 onStart = customanimstuff,
@@ -996,7 +993,6 @@ if SherlockHNS and IsValid(jumpscare_entity) and jumpscare_entity:IsPlayer() the
         end
 
         if jumpscare_entity ~= nil then
-            
             ent.JuumpscareStart = CurTime()
 
             ent.jumpscare_entity = jumpscare_entity
@@ -1008,8 +1004,8 @@ if SherlockHNS and IsValid(jumpscare_entity) and jumpscare_entity:IsPlayer() the
             targetAngle.p = 0
             targetAngle.r = 0
 
-            ply:SetNWInt("DisablePlayerMovement_herobrine_red_stun", duration+CurTime())
-            jumpscare_entity:SetNWInt("DisablePlayerMovement_herobrine_red_stun", duration+CurTime())
+            ply:SetNWInt("DisablePlayerMovement_herobrine_red_stun", duration + CurTime())
+            jumpscare_entity:SetNWInt("DisablePlayerMovement_herobrine_red_stun", duration + CurTime())
 
             ent.IsInJumpscare = CurTime() + duration
 
@@ -1021,7 +1017,7 @@ if SherlockHNS and IsValid(jumpscare_entity) and jumpscare_entity:IsPlayer() the
                 net.WriteBool(true)
                 net.Send(jumpscare_entity)
             else
-                jumpscare_entity:NextThink(duration+0.1+CurTime())
+                jumpscare_entity:NextThink(duration + 0.1 + CurTime())
             end
 
 
@@ -1029,7 +1025,7 @@ if SherlockHNS and IsValid(jumpscare_entity) and jumpscare_entity:IsPlayer() the
             local hookName = "herobrine_red_jumpscarehandel" .. ent:EntIndex()
 
             hook.Add("Think", hookName, function()
-                if !IsValid(ent) then
+                if ! IsValid(ent) then
                     hook.Remove("Think", hookName)
                     return
                 end
@@ -1039,8 +1035,7 @@ if SherlockHNS and IsValid(jumpscare_entity) and jumpscare_entity:IsPlayer() the
                 if ent.jumpscare_entity then
                     local entity = ent.jumpscare_entity
                     if IsValid(entity) then
-
-                        local lengthofentitybody = (entity:EyePos() - entity:GetPos()):Length() /2
+                        local lengthofentitybody = (entity:EyePos() - entity:GetPos()):Length() / 2
 
                         local cam = ent:GetPuppet():GetAttachment(ent:GetPuppet():LookupAttachment('camera'))
 
@@ -1048,11 +1043,12 @@ if SherlockHNS and IsValid(jumpscare_entity) and jumpscare_entity:IsPlayer() the
                             ent.jumpscare_entity = nil
                         else
                             local mins, maxs = ent:OBBMins(), ent:OBBMaxs()
-                            local lengthofentitybody = ((maxs.z - mins.z)/2)*0
+                            local lengthofentitybody = ((maxs.z - mins.z) / 2) * 0
 
                             local lerpFactor = math.Clamp((CurTime() - ent.JuumpscareStart) / 0.5, 0, 1)
                             local newAngle = LerpAngle(lerpFactor, ent.entitylastang, cam.Ang)
-                            local NewVector = LerpVector(lerpFactor, ent.entitylastpos, cam.Pos - entity:GetUp() * lengthofentitybody)
+                            local NewVector = LerpVector(lerpFactor, ent.entitylastpos,
+                                cam.Pos - entity:GetUp() * lengthofentitybody)
                             entity:SetPos(NewVector)
                             entity:SetAngles(newAngle)
                         end
@@ -1061,8 +1057,8 @@ if SherlockHNS and IsValid(jumpscare_entity) and jumpscare_entity:IsPlayer() the
             end)
 
             jumpscare_entity:AddFlags(FL_NOTARGET)
-            ent:CallOnRemove("RachelJumpscare"..ent:EntIndex(), function()
-                if !IsValid(jumpscare_entity) then return end
+            ent:CallOnRemove("RachelJumpscare" .. ent:EntIndex(), function()
+                if ! IsValid(jumpscare_entity) then return end
 
                 hook.Remove("Think", hookName)
                 jumpscare_entity:RemoveFlags(FL_NOTARGET)
@@ -1091,9 +1087,9 @@ pk_pills.packStart("Herobrine", "rpp_herobrine", "pills/redimated_herobrine.png"
 
 pk_pills.register('rpp_herobrine', {
     printName = 'Herobrine',
-    modelScale='1.0',
+    modelScale = '1.0',
     type = 'ply',
-    model="models/redimated/herobrine.mdl",
+    model = "models/redimated/herobrine.mdl",
 
     anims = {
         default = {
@@ -1106,34 +1102,34 @@ pk_pills.register('rpp_herobrine', {
         },
 
 
-            
-        ShouldMoveRotate={
-            idle= function(ent) 
-                return 'notshftlock' 
+
+        ShouldMoveRotate = {
+            idle = function(ent)
+                return 'notshftlock'
             end,
-            walk= function(ent) 
-                return 'notshftlock' 
+            walk = function(ent)
+                return 'notshftlock'
             end,
-            run= function(ent) 
-                return 'notshftlock' 
+            run = function(ent)
+                return 'notshftlock'
             end,
-            crouch_idle= function(ent) 
-                return 'notshftlock' 
+            crouch_idle = function(ent)
+                return 'notshftlock'
             end,
-            ["crouch_walk.smd"]= function(ent) 
-                return 'notshftlock' 
+            ["crouch_walk.smd"] = function(ent)
+                return 'notshftlock'
             end,
-            kill= function(ent) 
-                return 'notshftlock' 
+            kill = function(ent)
+                return 'notshftlock'
             end,
-            
+
         },
 
-        ShouldAlternate={
+        ShouldAlternate = {
         },
 
     },
-    
+
     sounds = {
         attack = "Weapon_Pistol.Single",
         enterfog = "redimated/herobrine/enter fog.mp3",
@@ -1149,14 +1145,14 @@ pk_pills.register('rpp_herobrine', {
         moveSpeed = {
             walk = 200,
             run = 500,
-            ducked= 25,
+            ducked = 25,
             jumppower = 0,
         },
     },
-    
+
     redimated_herobrine = true,
 
-    stats={
+    stats = {
         ["m1"] = {
             ['damage'] = 30,
             ['cd'] = 1,
@@ -1168,11 +1164,11 @@ pk_pills.register('rpp_herobrine', {
         },
         ["m2"] = {
             ['standstill'] = 5.5,
-            ['cd'] = 46 ,
+            ['cd'] = 46,
         },
     },
     togglefly = function(tog, ply)
-        ply:SetLocalVelocity(Vector(0,0,0))
+        ply:SetLocalVelocity(Vector(0, 0, 0))
         if tog then
             ply:SetMoveType(8)
             ply:SetNotSolid(true)
@@ -1183,8 +1179,8 @@ pk_pills.register('rpp_herobrine', {
     end,
 
     hullSize = { 16, 16, 32 },
-    movePoseMode="xy",
-    aim={ xPose="aim_yaw", yPose="aim_pitch", nocrosshair = true },
+    movePoseMode = "xy",
+    aim = { xPose = "aim_yaw", yPose = "aim_pitch", nocrosshair = true },
     muteSteps = true,
     cloak = {
         ["max"] = 255,
@@ -1192,9 +1188,9 @@ pk_pills.register('rpp_herobrine', {
     },
 
 
-    camera={
+    camera = {
         offset = Vector(0, 0, 50),
-        dist=130,
+        dist = 130,
     },
 
     attack = {
@@ -1232,12 +1228,12 @@ pk_pills.register('rpp_herobrine', {
 
                 timer.Simple(0.15, fadeLayer)
 
-                timer.Simple(0.9,function()
-                    if !IsValid(ent) then return end
+                timer.Simple(0.9, function()
+                    if ! IsValid(ent) then return end
                     puppet:RemoveLayer(layeredAnim)
                 end)
             end
-            ent._rpp_last_hitcd = CurTime()+1.1
+            ent._rpp_last_hitcd = CurTime() + 1.1
             pk_pills.setHNSCooldown(ent, "attack", 1.1)
 
             --[[
@@ -1262,19 +1258,19 @@ pk_pills.register('rpp_herobrine', {
             if ent.PillSound then
                 ent:PillSound("spectralstart")
             end
-            timer.Simple(2,function()
-                if !IsValid(ent) then return end
-                    
+            timer.Simple(2, function()
+                if ! IsValid(ent) then return end
+
                 if ent.PillSound then
                     ent:PillSound("spectralambience")
                 end
             end)
         end,
     },
-    herobrine_survivor_keybinds = function(ply,ent,button)
+    herobrine_survivor_keybinds = function(ply, ent, button)
         if button == KEY_R then
-
-            local COOLDOWN, durcd, killcd = ent.formTable.stats["r"]["cd"], ent.formTable.stats["r"]["durcd"], ent.formTable.stats["r"]["killcd"]
+            local COOLDOWN, durcd, killcd = ent.formTable.stats["r"]["cd"], ent.formTable.stats["r"]["durcd"],
+                ent.formTable.stats["r"]["killcd"]
             if ent._rpp_inviscd and CurTime() < ent._rpp_inviscd then return end
             if ent.durcdHerobrine_r and CurTime() < ent.durcdHerobrine_r then return end
             if ply._rpp_standstilldur and CurTime() < ply._rpp_standstilldur then return end
@@ -1292,15 +1288,14 @@ pk_pills.register('rpp_herobrine', {
                 ent:SetNWFloat("Herobrine_r_timeleft", COOLDOWN)
 
                 local ed = EffectData()
-                ed:SetOrigin(ply:GetPos()+Vector(0,0,0))
+                ed:SetOrigin(ply:GetPos() + Vector(0, 0, 0))
                 ed:SetEntity(ply)
                 util.Effect("Herobrine_thunder_red", ed)
 
-                ent:RemoveCallOnRemove("RemoveSound"..ent:EntIndex())
+                ent:RemoveCallOnRemove("RemoveSound" .. ent:EntIndex())
                 ent:StopSound("redimated/herobrine/spectural_ambiance.wav")
 
                 ply._rpp_standstilldur = CurTime() + 1.5
-                
             else
                 if ent.PillSound then
                     ent:PillSound("enterfog")
@@ -1311,12 +1306,12 @@ pk_pills.register('rpp_herobrine', {
                 ent:SetNWFloat("Herobrine_r_timeleft", durcd)
 
                 ent.iscloaked = true
-                timer.Simple(1,function()
-                    if !IsValid(ent) then return end
+                timer.Simple(1, function()
+                    if ! IsValid(ent) then return end
                     ent.formTable.togglefly(true, ply)
 
 
-                    ent:CallOnRemove("RemoveSound"..ent:EntIndex(), function()
+                    ent:CallOnRemove("RemoveSound" .. ent:EntIndex(), function()
                         ent:StopSound("redimated/herobrine/spectural_ambiance.wav")
                     end)
 
@@ -1339,7 +1334,7 @@ pk_pills.register('rpp_herobrine', {
         if SERVER then
             if event == "REDIMATEDKill" then
                 local jumpscare_entity = ent.jumpscare_entity
-                if !(IsValid(jumpscare_entity)) or !IsValid(ent) then return end
+                if ! (IsValid(jumpscare_entity)) or ! IsValid(ent) then return end
                 ent.jumpscare_entity = nil
                 if jumpscare_entity:IsPlayer() then
                     net.Start('rpp_herobrine_pill_cam')
@@ -1351,9 +1346,8 @@ pk_pills.register('rpp_herobrine', {
                     jumpscare_entity:NextThink(CurTime())
                     jumpscare_entity:TakeDamage(1e9, ply)
                 end
-                ent:RemoveCallOnRemove("RachelJumpscare"..ent:EntIndex())
+                ent:RemoveCallOnRemove("RachelJumpscare" .. ent:EntIndex())
                 hook.Remove("Think", "herobrine_red_jumpscarehandel" .. ent:EntIndex())
-                
             end
 
             if event == "SpawnStake" then
@@ -1363,7 +1357,7 @@ pk_pills.register('rpp_herobrine', {
 
                     if SherlockHNS then
                         local target = SherlockHNS.FindVictim(ply, stakeOrigin, 180)
-                        stakeTargets = IsValid(target) and {target} or {}
+                        stakeTargets = IsValid(target) and { target } or {}
                     else
                         stakeTargets = ents.FindInSphere(stakeOrigin, 180)
                     end
@@ -1373,8 +1367,7 @@ pk_pills.register('rpp_herobrine', {
                             if ent2 == ply then continue end
                             if ent2:IsPlayer() and ent2:Team() == TEAM_SPECTATOR then continue end
                             if IsValid(ent2) then
-
-                                if (SherlockHNS and ent2:IsPlayer()) or ent2:Health()-45 <= 0.1 then
+                                if (SherlockHNS and ent2:IsPlayer()) or ent2:Health() - 45 <= 0.1 then
                                     local dur = ent:GetPuppet():SequenceDuration(ent:GetPuppet():LookupSequence("kill"))
                                     racheljackietien_jumpscare(
                                         ply,
@@ -1383,7 +1376,8 @@ pk_pills.register('rpp_herobrine', {
                                         function()
                                             ent:PillSound("kill")
                                             ent:PillAnim('kill')
-                                        end,
+                                        end
+                                        ,
                                         180
                                     )
                                     break
@@ -1397,7 +1391,6 @@ pk_pills.register('rpp_herobrine', {
                                 dmg:SetDamagePosition(ent2:GetPos())
 
                                 ent2:TakeDamageInfo(dmg)
-                                
                             end
                         end
                     end
@@ -1406,7 +1399,7 @@ pk_pills.register('rpp_herobrine', {
         end
     end,
 
-    herobrine_redimated_pill_initialize = function(tablevarable1,tablevarable2,tablevarable3)
+    herobrine_redimated_pill_initialize = function(tablevarable1, tablevarable2, tablevarable3)
     end,
 
 
@@ -1431,8 +1424,8 @@ pk_pills.register('rpp_herobrine', {
     -- The legacy damage branches are for Sandbox and NPCs.
     form.hnsKillAPI = true
     form.hnsAbilities = {
-        { id = "attack", name = "Ataque", key = IN_ATTACK, OnUse = form.attack.func },
-        { id = "sight", name = "Visão espectral", key = IN_ATTACK2, OnUse = form.attack2.func },
+        { id = "attack", name = "Ataque",          key = IN_ATTACK,  OnUse = form.attack.func },
+        { id = "sight",  name = "Visão espectral", key = IN_ATTACK2, OnUse = form.attack2.func },
     }
     form.attack, form.attack2, form.reload = nil, nil, nil
     form.cloak = nil
