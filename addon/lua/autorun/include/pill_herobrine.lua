@@ -52,7 +52,7 @@ hook.Add("OnEntityCreated", "herobrine_redimated_pill_initialize", function(ent)
                         local duckBy = self.formTable.duckBy or (self.formTable.hull and 0 or 36)
                         ply:SetHull(-Vector(hull.x / 2, hull.y / 2, 0), Vector(hull.x / 2, hull.y / 2, hull.z))
                         ply:SetHullDuck(-Vector(hull.x / 2, hull.y / 2, 0),
-                            Vector(hull.x / 2, hull.y / 2, hull.z - duckBy or 0))                                                 --
+                            Vector(hull.x / 2, hull.y / 2, hull.z - duckBy or 0)) --
                         ply:SetRenderMode(RENDERMODE_NONE)
                         pk_pills.mapEnt(ply, nil)
 
@@ -427,7 +427,7 @@ hook.Add("OnEntityCreated", "herobrine_redimated_pill_initialize", function(ent)
                             local animsshouldspn = table.Copy(self.formTable.anims.animrates or {})
                             if animsshouldspn[currentanim] or (type(animsshouldspn[currentanim]) == "function" and animsshouldspn[currentanim](self)) then
                                 rate = (type(animsshouldspn[currentanim]) == "function" and animsshouldspn[currentanim](self)) or
-                                animsshouldspn[currentanim]
+                                    animsshouldspn[currentanim]
                             end
                             if rate > 12 then
                                 rate = 12
@@ -436,7 +436,7 @@ hook.Add("OnEntityCreated", "herobrine_redimated_pill_initialize", function(ent)
                         end
                         if animsshouldspn[currentanim] or (type(animsshouldspn[currentanim]) == "function" and animsshouldspn[currentanim](self)) then
                             local typeofitem = (type(animsshouldspn[currentanim]) == "function" and animsshouldspn[currentanim](self)) or
-                            animsshouldspn[currentanim]
+                                animsshouldspn[currentanim]
                             local function SetTargetAngle(ang)
                                 ang.p = 0
                                 puppet:SetNW2Vector("SyncAng", ang:Forward())
@@ -712,7 +712,7 @@ else
                 surface.DrawTexturedRectUV(xaxis, yaxis, IconSize, IconSize, 0, 0, 1, 1)
 
                 local progress = (ent:GetNWInt("Herobrine_r_cooldown") - CurTime()) /
-                ent:GetNWInt("Herobrine_r_timeleft")
+                    ent:GetNWInt("Herobrine_r_timeleft")
                 if progress > 0 then
                     local progress2 = Lerp(progress, 1, 0)
                     surface.SetDrawColor(75, 75, 75, 255)
@@ -726,7 +726,7 @@ else
                 surface.DrawTexturedRectUV(xaxis, yaxis, IconSize, IconSize, 0, 0, 1, 1)
 
                 local progress = (ent:GetNWInt("Herobrine_rmb_cooldown") - CurTime()) /
-                ent:GetNWInt("Herobrine_rmb_timeleft")
+                    ent:GetNWInt("Herobrine_rmb_timeleft")
                 if progress > 0 then
                     local progress2 = Lerp(progress, 1, 0)
                     surface.SetDrawColor(75, 75, 75, 255)
@@ -1196,14 +1196,32 @@ pk_pills.register('rpp_herobrine', {
     attack = {
         mode = 'trigger',
         func = function(ply, ent)
-            if ent._rpp_last_hitcd and CurTime() < ent._rpp_last_hitcd then return end
-            if ent.durcdHerobrine_r and CurTime() < ent.durcdHerobrine_r then return end
-            if ply._rpp_standstilldur and CurTime() < ply._rpp_standstilldur then return end
-            if ply:GetNWInt("DisablePlayerMovement_herobrine_red_stun") > CurTime() then return end
-            if ent.iscloaked then return end
+            if ent._rpp_last_hitcd and CurTime() < ent._rpp_last_hitcd then return false end
+            if ent.durcdHerobrine_r and CurTime() < ent.durcdHerobrine_r then return false end
+            if ply._rpp_standstilldur and CurTime() < ply._rpp_standstilldur then return false end
+            if ply:GetNWInt("DisablePlayerMovement_herobrine_red_stun") > CurTime() then return false end
+            if ent.iscloaked then return false end
 
             local puppet = ent:GetPuppet()
-            if not IsValid(puppet) then return end
+            if not IsValid(puppet) then return false end
+            if not SERVER then return end
+
+            -- HnS: decide a vítima NO CLIQUE (não depende do evento de animação)
+            if SherlockHNS then
+                local victim = SherlockHNS.FindVictim(ply, ent:LocalToWorld(Vector(0, 0, 50)), 180)
+                if IsValid(victim) then
+                    local dur = puppet:SequenceDuration(puppet:LookupSequence("kill"))
+                    if dur <= 0 then dur = 1.5 end
+                    local ok = racheljackietien_jumpscare(ply, ent, dur, function()
+                        ent:PillSound("kill")
+                        ent:PillAnim("kill")
+                    end, 180)
+                    if ok == false then return false end
+                    ent._rpp_last_hitcd = CurTime() + dur
+                    return
+                end
+            end
+
             if SERVER then
                 local layeredAnim = puppet:AddGesture(ACT_VM_RELOAD, false)
 
